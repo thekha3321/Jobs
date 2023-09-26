@@ -19,8 +19,11 @@ import {
 import { COLORS, icons, SIZES } from "../../constants";
 import useFetch from "../../hook/useFetch";
 
+const tabs = ['About', 'Qualitications', 'Responsibilites'];
+
 const Jobdetails = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const [activeTab, setActiveTab] = useState(tabs[0])
   const params = useLocalSearchParams();
   const router = useRouter();
   const { data, isLoading, error, refetch } = useFetch("job-details", {
@@ -72,7 +75,11 @@ const Jobdetails = () => {
                 companyName={data[0].employer_name}
                 location={data[0].job_company}
                 />
-                <JobTabs />
+                <JobTabs 
+                  tabs={tabs}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                />
             </View>
           )}
         </ScrollView>
